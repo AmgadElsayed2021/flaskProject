@@ -1,11 +1,13 @@
     <header>
         <nav>
+        {# here will goes all the buttons in the nav section for all the pages#}
             <ul class="nav nav-pills">
-                <li class="nav-item"><a href="{{ url_for('index') }}" class="nav-link active">Home</a></li>
-                <li class="nav-item"><a href="{{ url_for('categories') }}" class="nav-link">Categories</a></li>
-                <li class="nav-item"><a href="{{ url_for('books') }}" class="nav-link">Books</a></li>
-                <li class="nav-item"><a href="{{ url_for('register') }}" class="nav-link">Register</a></li>
-                <li class="nav-item"><a href="{{ url_for('login') }}" class="nav-link">Login</a></li>
+            {#  the if condition is used to move the styling for the nav btns to the button we are using#}
+                <li class="nav-item"><a href="{{ url_for('index') }}" class="nav-link {% if index %}active{% endif %}">Home</a></li>
+                <li class="nav-item"><a href="{{ url_for('categories') }}" class="nav-link {% if categories %}active{% endif %}">Categories</a></li>
+                <li class="nav-item"><a href="{{ url_for('books') }}" class="nav-link {% if books %}active{% endif %}">Books</a></li>
+                <li class="nav-item"><a href="{{ url_for('register') }}" class="nav-link {% if register %}active{% endif %}">Register</a></li>
+                <li class="nav-item"><a href="{{ url_for('login') }}" class="nav-link {% if login %}active{% endif %}">Login</a></li>
             </ul>
         </nav>
         <hr style="clear:both">

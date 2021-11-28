@@ -1,0 +1,25 @@
+{#will be used to design the layout of all pages in one time instead of repeating the step in every html file#}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>UTA - Home Page</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="static/css/main.css"/>
+</head>
+<body>
+{# this will be the header of all the pages#}
+<div class="container-fluid text-center top-container">
+    <img src="static/images/bs.jpg">
+</div>
+<div class="container">
+{#    call the nav.html to display the navigation buttons in all the pages#}
+    {% include "includes/nav.html" %}
+    {% block content %}
+{#here goes all the content of the other html files #}
+    {% endblock %}
+</div>
+{#call the footer html#}
+{% include "includes/footer.html" %}
+</body>
+</html>

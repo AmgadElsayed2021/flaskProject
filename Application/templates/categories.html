@@ -1,0 +1,36 @@
+    {% extends "layout.html" %}
+
+    {% block content %}
+    <h1>Categories</h1>
+
+    <div>
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th scope="col">Category ID</th>
+                <th scope="col">Title</th>
+                <th scope="col">Description</th>
+                <th scope="col">image</th>
+                <th scope="col">Preview Category</th>
+
+            </tr>
+            </thead>
+            <tbody>
+
+            <!-- Construct the rest of courses here -->
+            {% for data in courseData %}
+            <tr>
+                <td>{{ data["category_ID"] }}</td>
+                <td>{{ data["title"] }}</td>
+                <td>{{ data["description"] }}</td>
+                <td>{{ data["image"] }}</td>
+                <td>{{ data["link"] }}</td>
+
+            </tr>
+            {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
+
+{% endblock %}

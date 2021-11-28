@@ -56,15 +56,19 @@ input[type=text]:focus, input[type=password]:focus {
 
 .top-container {
     background: #ccc;
-    padding:5px;
+    padding:2px;
     border-bottom:2px solid #0f0f0f;
-    height: 450px;
+}
+.top-container img{
+    width: 100%;
+    position: relative;
 }
 .bottom-container {
-    background: #333;
+    margin-top: 200px;
+    background: orange;
     padding:5px;
     border-top:2px solid #0f0f0f;
-    position:absolute;
+    position:relative;
     bottom:0;
 }
 
@@ -81,6 +85,7 @@ footer {
     padding: 5px;
     margin-top: 10px;
     bottom: 0px;
+    position: static;
 }
 
 .btn-submit {
