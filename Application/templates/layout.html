@@ -2,15 +2,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>UTA - Home Page</title>
+    <title>Amgad Book-Store</title>
+{#    we will need to link bootstrap here#}
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="static/css/main.css"/>
+{#    link the style.css file#}
+    <link rel="stylesheet" href="{{ url_for ('static',filename='css/style.css')}}"/>
 </head>
 <body>
 {# this will be the header of all the pages#}
 <div class="container-fluid text-center top-container">
-    <img src="static/images/bs.jpg">
+    <img src="{{ url_for ('static',filename='images/bs.jpg')}}">
 </div>
 <div class="container">
 {#    call the nav.html to display the navigation buttons in all the pages#}
@@ -21,5 +23,6 @@
 </div>
 {#call the footer html#}
 {% include "includes/footer.html" %}
+
 </body>
 </html>

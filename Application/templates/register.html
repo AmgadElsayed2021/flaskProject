@@ -5,23 +5,27 @@
     <h2>New User Registration</h2>
 
     <div class="container">
-        <form name="register" action="register.php" method="get">
+        <form name="register" id="registration_form" action="register.html" method="get">
             <label for="username"><b>Username</b></label>
-            <input type="text" placeholder="Enter Username" name="username" required>
+            <input type="text"  id = "username" placeholder="Enter Username" name="username" required>
             <br>
-            <label for="email"><b>Email</b></label>
-            <input type="text" placeholder="Enter Email" name="email" required>
+            <label for="email1"><b>Email</b></label>
+            <input type="text" id ="email1" placeholder="Enter Email" name="email" required>
             <br>
-            <label for="email"><b>Verify Email</b></label>
-            <input type="text" placeholder="Enter Email" name="email" required>
+            <label for="email2"><b>Verify Email</b></label>
+            <input type="text" id ="email2" placeholder="Enter Email" name="email" required>
             <br>
-            <label for="password"><b>Password</b></label>
-            <input type="password" placeholder="Enter Password" name="password" required>
+            <label for="pass1"><b>Password</b></label>
+            <input type="password" id="pass1" placeholder="Enter Password" name="password" required>
             <br class="clear">
-            <label for="password"><b>Verify Password</b></label>
-            <input type="password" placeholder="Enter Password" name="password" required>
+            <label for="pass2"><b>Verify Password</b></label>
+            <input type="password"  id="pass2" placeholder="Enter Password" name="password" required>
             <br class="clear">
             <input class="btn-submit" type="submit" name="submit">
         </form>
     </div>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="{{ url_for ('static',filename='js/script.js')}}"></script>
+
+
     {% endblock %}
