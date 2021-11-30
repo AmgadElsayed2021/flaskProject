@@ -2,7 +2,9 @@
 
     {% block content %}
     <h1>Books</h1>
-
+{#    {%  for book in books %}#}
+{#        <img src = 'static/images/{{ book }}'></img>#}
+{#    {% endfor %}#}
     <div>
         <table class="table table-hover">
             <thead>
@@ -20,15 +22,14 @@
             <tbody>
 
             <!-- Construct the rest of courses here -->
-            {% for data in bookList %}
+            {% for book in books %}
             <tr>
-                <td>{{ data["ID"] }}</td>
-                <td>{{ data["Title"] }}</td>
-                <td>{{ data["Description"] }}</td>
-                <td>{{ data["Image"] }}</td>
-                <td>{{ data["Year"] }}</td>
-                <td>{{ data["category"] }}</td>
-
+                <td>{{ book["ID"] }}</td>
+                <td>{{ book["Title"] }}</td>
+                <td>{{ book["Description"] }}</td>
+                <td>{{ book["Image"] }}</td>
+                <td>{{ book["Year"] }}</td>
+                <td>{{ book["category"] }}</td>
 
             </tr>
             {% endfor %}
