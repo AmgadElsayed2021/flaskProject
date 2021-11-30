@@ -25,9 +25,9 @@
             {% for book in books %}
             <tr>
                 <td>{{ book["ID"] }}</td>
-                <td>{{ book["Title"] }}</td>
+                <td><h3>{{ book["Title"] }}</h3></td>
                 <td>{{ book["Description"] }}</td>
-                <td>{{ book["Image"] }}</td>
+                <td><img src = 'static/images/{{ book["Image"] }}'></img></td>
                 <td>{{ book["Year"] }}</td>
                 <td>{{ book["category"] }}</td>
 
