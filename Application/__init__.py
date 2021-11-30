@@ -5,6 +5,8 @@ from config import Config
 app = Flask(__name__)
 # lets import all the routes from the route.html
 from Application import routes
+# app.config['DEBUG'] = True
+
 
 
 # if __name__ == '__main__':
