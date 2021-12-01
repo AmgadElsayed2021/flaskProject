@@ -9,7 +9,6 @@
         <table class="table table-hover">
             <thead>
             <tr>
-                <th scope="col">Book ID</th>
                 <th scope="col">Book Title</th>
                 <th scope="col">Description</th>
                 <th scope="col">image</th>
@@ -24,7 +23,6 @@
             <!-- Construct the rest of courses here -->
             {% for book in books %}
             <tr>
-                <td>{{ book["ID"] }}</td>
                 <td><h3>{{ book["Title"] }}</h3></td>
                 <td>{{ book["Description"] }}</td>
                 <td><img src = 'static/images/{{ book["Image"] }}'></img></td>
