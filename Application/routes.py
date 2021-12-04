@@ -47,15 +47,24 @@ def categories():
         for result in results :
             categories.append(result)
 
-        if request.method == 'POST' and 'category' in request.select :
-            cat = request.select['category']
+        # if request.method == 'POST':
+        #     categoryName = request.args.get('CategoryName')
+        category=""
+        category = request.form.get['category']
+        print(category)
+
+
         with closing(conn.cursor()) as c :
-            c.execute('select * from Books where category=?',(cat))
-        results = c.fetchall()
-        category_books = []
-        for result in results :
-            category_books.append(result)
-    return render_template('categories.html',category_books=category_books,categories=categories)
+            c.execute('SELECT * FROM Books WHERE category = ? ', (category,))
+    #         account = c.fetchone()
+    # category = "Programming"
+    # with closing(conn.cursor()) as c :
+    #     c.execute('select * from Books where category = ? ',(category,))
+            books = c.fetchall()
+            category_books = []
+            for book in books :
+                category_books.append(book)
+    return render_template('categories.html',categories=categories,category_books=category_books)
 
 @app.route('/books')
 def books():
