@@ -20,7 +20,23 @@ def login():
 
 @app.route('/categories')
 def categories():
-    return render_template('categories.html',categories=True)
+    with closing(conn.cursor()) as c :
+        query = 'select distinct category from Books'
+        c.execute(query)
+        results = c.fetchall()
+        categories = []
+        for result in results :
+            categories.append(result)
+
+
+
+        query = 'select * from Books where category=?'
+        c.execute(query,({{ form.selected}},))
+        results = c.fetchall()
+        category_books = []
+        for result in results :
+            category_books.append(result)
+    return render_template('categories.html',category_books=category_books,categories=categories)
 
 @app.route('/books')
 def books():

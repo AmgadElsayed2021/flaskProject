@@ -2,7 +2,14 @@
 
     {% block content %}
     <h1>Categories</h1>
-
+<div>
+<select name="Category" method="GET" action="/">
+  <option value="selected" selected>choose a category to display</option>
+  {% for category in categories %}
+    <option value="{{ category["category"] }}">{{ category["category"] }}</option>
+  {% endfor %}
+</select>
+</div>
     <div>
         <table class="table table-hover">
             <thead>
