@@ -1,6 +1,6 @@
 import sqlite3
 from Application import app
-from flask import render_template,request
+from flask import render_template, request, session
 from contextlib import closing
 
 # def get_db_connection():
@@ -13,30 +13,31 @@ conn.row_factory = sqlite3.Row
 @app.route('/index')
 def index():
     return render_template('index.html', index=True)# just make the index = true so i can use to style the nav button in the nav.html
-# msg = ''
-#     if request.method == 'POST' and 'username' in request.form and 'password' in request.form :
-#         username = request.form['username']
-#         password = request.form['password']
-#         with closing(conn.cursor()) as c :
-#             query=('SELECT * FROM accounts WHERE username = % s AND password = % s', (username, password,))
-#             c.execute(query)
-#         account = c.fetchone()
-#
-#         if account :
-#             session['loggedin'] = True
-#             session['id'] = account['id']
-#             session['username'] = account['username']
-#             msg = 'Logged in successfully !'
-#             return render_template('index.html', msg=msg)
-#         else :
-#             msg = 'Incorrect username / password !'
-#     return render_template('login.html', msg=msg)
 
-@app.route('/login')
+
+@app.route('/login',methods =['GET', 'POST'])
 def login():
-    return render_template('login.html',login=True)
+    msg = ''
+    if request.method == 'POST' and 'email' in request.form and 'password' in request.form :
+        email = request.form['email']
+        password = request.form['password']
+        with closing(conn.cursor()) as c :
+            c.execute('SELECT * FROM accounts WHERE email = ? AND password = ?', (email, password,))
+            account = c.fetchone()
 
-@app.route('/categories')
+        if account :
+            session['loggedin'] = True
+            session['id'] = account['id']
+            session['email'] = account['email']
+            msg = 'Logged in successfully !'
+            return render_template('index.html', msg=msg)
+        else :
+            msg = 'Incorrect email / password !'
+    return render_template('login.html', msg=msg)
+
+
+
+@app.route('/categories',methods =['GET', 'POST'])
 def categories():
     with closing(conn.cursor()) as c :
         query = 'select distinct category from Books'
@@ -46,9 +47,10 @@ def categories():
         for result in results :
             categories.append(result)
 
-
-        query = 'select * from Books where category=?'
-        c.execute(query,({{ categories}},))
+        if request.method == 'POST' and 'category' in request.select :
+            cat = request.select['category']
+        with closing(conn.cursor()) as c :
+            c.execute('select * from Books where category=?',(cat))
         results = c.fetchall()
         category_books = []
         for result in results :
@@ -62,10 +64,10 @@ def books():
         query= 'select * from Books'
         c.execute(query)
         results = c.fetchall()
-        books=[]
+        bookList=[]
         for result in results:
-            books.append(result)
-    return render_template('books.html',books=books)
+            bookList.append(result)
+    return render_template('books.html',bookList=bookList,books=False)
 
 
 @app.route('/register')
