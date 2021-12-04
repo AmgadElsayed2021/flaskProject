@@ -1,6 +1,18 @@
 * {
     box-sizing: border-box;
 }
+/*this is the styling for my website description */
+#myText{
+    display: block;
+    float: right;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-style: italic;
+    color: #30799B;
+}
+
+
+
+
 
 *:before,
 *:after {

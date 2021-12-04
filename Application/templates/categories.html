@@ -14,24 +14,22 @@
         <table class="table table-hover">
             <thead>
             <tr>
-                <th scope="col">Category ID</th>
-                <th scope="col">Title</th>
+                <th scope="col">Book Title</th>
                 <th scope="col">Description</th>
                 <th scope="col">image</th>
-                <th scope="col">Preview Category</th>
+                <th scope="col">Year</th>
 
             </tr>
             </thead>
             <tbody>
 
             <!-- Construct the rest of courses here -->
-            {% for data in courseData %}
+            {% for book in category_books %}
             <tr>
-                <td>{{ data["category_ID"] }}</td>
-                <td>{{ data["title"] }}</td>
-                <td>{{ data["description"] }}</td>
-                <td>{{ data["image"] }}</td>
-                <td>{{ data["link"] }}</td>
+                <td><h3>{{ book["Title"] }}</h3></td>
+                <td>{{ book["Description"] }}</td>
+                <td><img src = 'static/images/{{ book["Image"] }}'></img></td>
+                <td>{{ book["Year"] }}</td>
 
             </tr>
             {% endfor %}
