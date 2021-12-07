@@ -7,17 +7,29 @@ $(document).ready(() => {
     let isValid = true;
 
     // validate the name text
-    let username=$("#username")
-    const name =username.val().trim();
-    console.log(name)
-    if (name === "") {
-      username.next().text("This field is required.");
+    // let fname=$("#username")
+    const first =$("#fname")
+    const fname =first.val().trim();
+    console.log(fname)
+    if (fname === "") {
+      $("#fname").next().text("This field is required.");
       isValid = false;
     } else {
-      username.next().text("");
+      $("#fname").next().text("");
     }
-    username.val(name);
+    first.val(fname);
 
+
+    const last=$("#lname")
+    const lname =last.val().trim();
+    console.log(lname)
+    if (lname === "") {
+      $("#lname").next().text("This field is required.");
+      isValid = false;
+    } else {
+      $("#lname").next().text("");
+    }
+    last.val(lname);
     // validate the email1 input
     let email1=$("#email1")
     const email1Val = email1.val().trim();

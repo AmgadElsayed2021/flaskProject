@@ -1,0 +1,44 @@
+{#import all the page layout from the layout.html file#}
+{% extends "layout.html" %}
+{% block content %}
+
+
+<h1 category books></h1>
+ <div>
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th scope="col">Book Title</th>
+                <th scope="col">Description</th>
+                <th scope="col">image</th>
+                <th scope="col">Year</th>
+
+
+            </tr>
+            </thead>
+            <tbody>
+
+            <!-- Construct the rest of courses here -->
+            {% for book in Books %}
+            <tr>
+                <td><h3>{{ book["Title"] }}</h3></td>
+                <td>{{ book["Description"] }}</td>
+                <td><img src = 'static/images/{{ book["Image"] }}'></img></td>
+                <td>{{ book["Year"] }}</td>
+
+            </tr>
+            {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
+
+
+
+
+
+
+
+
+
+{% endblock %}

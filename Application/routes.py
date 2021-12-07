@@ -11,12 +11,13 @@ conn.row_factory = sqlite3.Row
 @app.route('/')
 @app.route('/home')
 @app.route('/index')
-def index():
-    return render_template('index.html', index=True)# just make the index = true so i can use to style the nav button in the nav.html
+def index() :
+    return render_template('index.html',
+                           index=True)  # just make the index = true so i can use to style the nav button in the nav.html
 
 
-@app.route('/login',methods =['GET', 'POST'])
-def login():
+@app.route('/login', methods=['GET', 'POST'])
+def login() :
     msg = ''
     if request.method == 'POST' and 'email' in request.form and 'password' in request.form :
         email = request.form['email']
@@ -36,49 +37,57 @@ def login():
     return render_template('login.html', msg=msg)
 
 
-
-@app.route('/categories',methods =['GET', 'POST'])
-def categories():
+@app.route('/categoryBooks', methods=['GET', 'POST'])
+def categoryBooks() :
+    category = request.args.get('category')
     with closing(conn.cursor()) as c :
-        query = 'select distinct category from Books'
+        c.execute('select * from Books where category=?', (category,))
+        results = c.fetchall()
+        Books = []
+        for result in results :
+            Books.append(result)
+    return render_template("categoryBooks.html", Books=Books, category={"category" : category})
+
+
+@app.route('/categories', methods=['GET', 'POST'])
+def categories() :
+    # images=['murach java.png','pacific.jpg']
+    with closing(conn.cursor()) as c :
+        query = 'select distinct  category ,count(*) as nOfBooks from Books group by category'
         c.execute(query)
         results = c.fetchall()
-        categories = []
+        categoryList = []
         for result in results :
-            categories.append(result)
+            categoryList.append(result)
+    return render_template('categories.html', categoryList=categoryList, categories=False)
 
-        # if request.method == 'POST':
-        #     categoryName = request.args.get('CategoryName')
-        category=""
-        category = request.form.get['category']
-        print(category)
-
-
-        with closing(conn.cursor()) as c :
-            c.execute('SELECT * FROM Books WHERE category = ? ', (category,))
-    #         account = c.fetchone()
-    # category = "Programming"
-    # with closing(conn.cursor()) as c :
-    #     c.execute('select * from Books where category = ? ',(category,))
-            books = c.fetchall()
-            category_books = []
-            for book in books :
-                category_books.append(book)
-    return render_template('categories.html',categories=categories,category_books=category_books)
 
 @app.route('/books')
-def books():
+def books() :
     # images=['murach java.png','pacific.jpg']
-    with closing(conn.cursor())as c:
-        query= 'select * from Books'
+    with closing(conn.cursor()) as c :
+        query = 'select * from Books'
         c.execute(query)
         results = c.fetchall()
-        bookList=[]
-        for result in results:
+        bookList = []
+        for result in results :
             bookList.append(result)
-    return render_template('books.html',bookList=bookList,books=False)
+    return render_template('books.html', bookList=bookList, books=False)
 
 
-@app.route('/register')
-def register():
-    return render_template('register.html',register=True)
+@app.route('/register' ,methods=['GET','POST'])
+def register() :
+    return render_template('register.html')
+
+
+@app.route('/registered',methods =['POST','GET'])
+def registered():
+    if request.method == 'POST' and 'email' in request.form and 'password' in request.form and 'fname' in request.form and 'lname' in request.form :
+        email = request.form['email']
+        fname = request.form['fname']
+        lname = request.form['lname']
+        password = request.form['password']
+    with closing(conn.cursor()) as c :
+        c.execute('INSERT INTO Accounts VALUES (?,?,?,?);', (lname, fname, email, password,))
+
+    return render_template('registered.html',data={fname:'fname',lname:'lname',email:'email',password:'password'})
