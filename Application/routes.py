@@ -1,12 +1,13 @@
+import os
 import sqlite3
 from Application import app
-from flask import render_template, request, session
+from flask import render_template, request, session, redirect
 from contextlib import closing
 
 # def get_db_connection():
 conn = sqlite3.connect('database.sqlite', check_same_thread=False)
 conn.row_factory = sqlite3.Row
-
+app.config['UPLOAD_PATH']='Application/static/images'
 
 @app.route('/')
 @app.route('/home')
@@ -75,19 +76,52 @@ def books() :
     return render_template('books.html', bookList=bookList, books=False)
 
 
-@app.route('/register' ,methods=['GET','POST'])
+
+# below is where the registration routes will be coded
+@app.route('/register' )
 def register() :
     return render_template('register.html')
+@app.route('/registered' )
+def registered() :
+    return render_template('registered.html')
 
-
-@app.route('/registered',methods =['POST','GET'])
-def registered():
-    if request.method == 'POST' and 'email' in request.form and 'password' in request.form and 'fname' in request.form and 'lname' in request.form :
-        email = request.form['email']
-        fname = request.form['fname']
-        lname = request.form['lname']
-        password = request.form['password']
+@app.route('/register',methods =['POST','GET'])
+def getRegistrationFormData():
+    fname = request.values['fname']
+    lname = request.values['lname']
+    email = request.values['email']
+    password = request.values['password']
     with closing(conn.cursor()) as c :
         c.execute('INSERT INTO Accounts VALUES (?,?,?,?);', (lname, fname, email, password,))
+    return redirect('registered')
 
-    return render_template('registered.html',data={fname:'fname',lname:'lname',email:'email',password:'password'})
+
+# below is where i will create the update link
+@app.route('/update')
+def update():
+    return render_template('update.html')
+@app.route('/update',methods =['POST','GET'])
+def getFormData():
+    title=request.values['title']
+    year=request.values['year']
+    description=request.values['description']
+    category =request.values['category']
+    uploaded_file=request.files['file']
+
+    if uploaded_file.filename !='':
+        uploaded_file.save(os.path.join(app.config['UPLOAD_PATH'],uploaded_file.filename))
+        with closing(conn.cursor())as c:
+            c.execute('INSERT INTO Books (Title,Description,Year,Image,Category) VALUES (?,?,?,?,?);', (title, description, year, uploaded_file.filename,category))
+    return redirect ('books')
+
+
+@app.route('/delete')
+def delete():
+    return render_template('delete.html')
+
+@app.route('/delete',methods =['POST','GET'])
+def getDeletedData():
+    title=request.values['title']
+    with closing(conn.cursor())as c:
+        c.execute('Delete from Books where Title=? ;', (title,))
+    return redirect ('books')

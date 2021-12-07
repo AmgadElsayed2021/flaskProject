@@ -1,0 +1,10 @@
+{#import all the page layout from the layout.html file#}
+{% extends "layout.html" %}
+{% block content %}
+<h1>Book Upload</h1>
+    <form method="POST" action ="" enctype="multipart/form-data">
+    <p><input type="text" name="title" placeholder="Enter Book Title"></p>
+    <p><input type="submit" value="delete"></p>
+
+    </form>
+{% endblock %}

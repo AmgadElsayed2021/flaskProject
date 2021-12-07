@@ -5,7 +5,8 @@
     <h2>New User Registration</h2>
 
     <div class="container">
-        <form name="register" id="registration_form" action="{{ url_for('registered') }}" method="POST">
+
+        <form name="register" id="registration_form" enctype="multipart/form-data" action="" method="POST">
             <label for="fname"><b>First Name</b></label>
             <input type="text"  id = "fname" placeholder="Enter your first name" name="fname" required><span>*</span>
             <br>
@@ -16,13 +17,13 @@
             <input type="text" id ="email1" placeholder="Enter Email" name="email" required> <span>*</span>
             <br>
             <label for="email2"><b>Verify Email</b></label>
-            <input type="text" id ="email2" placeholder="Enter Email" name="email" required><span>*</span>
+            <input type="text" id ="email2" placeholder="Enter Email" name="email2" required><span>*</span>
             <br>
             <label for="pass1"><b>Password</b></label>
             <input type="password" id="pass1" placeholder="Enter Password" name="password" required><span>*</span>
             <br class="clear">
             <label for="pass2"><b>Verify Password</b></label>
-            <input type="password"  id="pass2" placeholder="Enter Password" name="password" required><span>*</span>
+            <input type="password"  id="pass2" placeholder="Enter Password" name="password2" required><span>*</span>
             <br class="clear">
             <input class="btn-submit" type="submit" name="submit">
         </form>
