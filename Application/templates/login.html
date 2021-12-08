@@ -1,35 +1,33 @@
     {% extends "layout.html" %}
 
     {% block content %}
-    <h1>Login</h1>
-<div >
-          <div  class="border">
-             <div class="header">
-{#                <h1 class="word">Login</h1>#}
-             </div></br></br></br>
-            <h2 class="word">
-                <form action="{{ url_for('login') }}" method="post">
-                  <div class="msg">{{ msg }}</div>
-                    <input id="email" name="email" type="text" placeholder="Enter Your Email Address" class="textbox"/></br></br>
-                    <input id="password" name="password" type="password" placeholder="Enter Your Password" class="textbox"/></br></br></br>
-                    <input type="submit" class="btn" value="Sign In"></br></br>
-                </form>
-            </h2>
-            <p class="bottom">Don't have an account?  <a class="bottom" href="{{url_for('register')}}"> Sign Up here</a></p>
-          </div>
+    <h1>{{ title }}</h1>
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <h3></h3>
+            <form name="login" action="" method="POST" novalidate>
+{#                i will be calling the login form from the forms.py down here#}
+                {{ form.hidden_tag() }}
+                <p>
+                    {{ form.email.label }}<br>
+                    {{ form.email(size=50) }}
+{#                validate the errors using flask validate errors#}
+                    {% for error in form.email.errors %}
+                    <span class="error-message">{{ error }}</span>
+                    {% endfor %}
+                </p>
+                <p>
+                    {{ form.password.label }}<br>
+                    {{ form.password(size=50) }}
+                    {% for error in form.password.errors %}
+                    <span class="error-message">{{ error }}</span>
+                    {% endfor %}
+                </p>
+                <p>
+                    {{ form.submit() }}
+                </p>
+
+            </form>
         </div>
-{#    <div class="row">#}
-{#        <div class="col-md-6 offset-md-3">#}
-{#            <h3></h3>#}
-{#            <form name="login" action="login.php" method="post">#}
-{#                <label for="username"><b>Username</b></label>#}
-{#                <input type="text" placeholder="Enter Username" name="username" required>#}
-{#                <br>#}
-{#                <label for="password"><b>Password</b></label>#}
-{#                <input type="password" placeholder="Enter Password" name="password" required>#}
-{#                <br class="clear">#}
-{#                <input class="btn-submit" type="submit" name="submit" value="Login">#}
-{#            </form>#}
-{#        </div>#}
-{#    </div>#}
+    </div>
  {% endblock %}

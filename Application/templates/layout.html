@@ -22,6 +22,20 @@ Your browser does not support the audio element.
 <div class="container">
 {#    call the nav.html to display the navigation buttons in all the pages#}
     {% include "includes/nav.html" %}
+{#put the flash message here#}
+    {% with messages= get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category,message in messages %}
+            {#            usinf the bootstrap alerting methods#}
+                <div class = "alert alert-{{ category }}">
+                    <p>
+                        {{ message }}
+                    </p>
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
     {% block content %}
 {#here goes all the content of the other html files #}
     {% endblock %}
