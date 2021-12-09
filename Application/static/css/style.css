@@ -10,10 +10,6 @@
     color: #30799B;
 }
 
-
-
-
-
 *:before,
 *:after {
     box-sizing: border-box;
@@ -63,6 +59,14 @@ input[type=text], input[type=password] {
 
 }
 
+/*JUST NEED TO ALIGN THE REGISTRATION FORM STYLING*/
+#registration_form label{
+    width: 100px;
+    margin-left: 50PX;
+}
+#registration_form input{
+    margin-left: 50px;
+}
 input[type=text]:focus, input[type=password]:focus {
     background-color: #ddd;
     outline: none;
@@ -118,3 +122,6 @@ footer {
 .error-message{
     color:red;
 }
+
+
+/*SOME OF THE CSS HERE WAS FOR OLD FORM THAT I HAVE DELETED */

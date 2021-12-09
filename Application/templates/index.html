@@ -11,7 +11,7 @@
         <p>Hopefully you will enjoy my website</p>
     </div>
     <div class="col-md-12 text-center">
-        {% if login %}
+        {% if session['email'] %}
         <h3>Let's get started.</h3>
         {% else %}
         <p>Already registered? <a href="{{url_for('login') }}">Login</a></p>
