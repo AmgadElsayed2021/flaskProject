@@ -1,19 +1,7 @@
     {% extends "layout.html" %}
     {% block content %}
     <h1>Categories</h1>
-{#<div>#}
-{#    <h1>select a category</h1>#}
-{#    <form method="GET" action="/categories">#}
-{#        <select name="categoryName" id ='select' required>#}
-{#          {% for category in categoryList %}#}
-{#            <option value="{{ category["category"] }}">{{ category["category"] }}</option>#}
-{#          {% endfor %}#}
-{#          <input type="submit" name="GO" value="Go"/>#}
-{##}
-{#        </select>#}
-{##}
-{#    </form>#}
-{#</div>#}
+
            {% if not session['email'] %}
         <h3>you are not logged in </h3>
         <p>Already registered? <a href="{{url_for('login') }}">Login</a></p>
