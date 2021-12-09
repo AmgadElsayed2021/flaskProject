@@ -22,16 +22,11 @@ app.config['UPLOAD_PATH'] = 'Application/static/images'
 @app.route('/home')
 @app.route('/index')
 def index() :
-    if session.get("email"):
-        return redirect(url_for('index'))
     return render_template('index.html')
 
 # here is the route for the login page
 @app.route('/login', methods=['GET', 'POST'])
 def login() :
-    if session.get("email"):
-        return redirect(url_for('index'))
-
     form = LoginForm()
     if form.validate_on_submit() :
         if request.method == 'POST' and 'email' in request.form and 'password' in request.form :
@@ -67,9 +62,7 @@ def logout():
 # route for category books
 @app.route('/categoryBooks', methods=['GET', 'POST'])
 def categoryBooks() :
-    if not session.get("email"):
-        return redirect(url_for('login'))
-    email=session.get['email']
+
     # query to search the data base for all the available books for a specific category
     category = request.args.get('category')
     with closing(conn.cursor()) as c :
@@ -120,10 +113,17 @@ def getRegistrationFormData() :
     lname = request.form['lname']
     email = request.form['email']
     password = request.form['password']
+    # with closing(conn.cursor)as m:
+    #     m.execute('select * from Accounts where email =?',(email,))
+    #     account = m.fetchone()
+    # if len(account)<=0:
     with closing(conn.cursor()) as c :
         c.execute('INSERT INTO Accounts (fname,lname,email,password) VALUES (?,?,?,?);',
                   (lname, fname, email, password,))
         conn.commit()
+    # else:
+    #     flash("the email address is not available","danger")
+    #     return redirect("register")
     return redirect('login')
 
 
