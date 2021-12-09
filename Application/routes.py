@@ -136,10 +136,10 @@ def update() :
 @app.route('/update', methods=['POST', 'GET'])
 def getFormData() :
     #  get all the data from the update books form and add them to the data base
-    title = request.values['title']
+    title = request.values['title'].title()
     year = request.values['year']
     description = request.values['description']
-    category = request.values['category']
+    category = request.values['category'].title()
     uploaded_file = request.files['file']
     # check if the uploaded file match the specific requirement we set on top of this routes.py
     if uploaded_file.filename != '' :
@@ -166,7 +166,7 @@ def delete() :
 @app.route('/delete', methods=['POST', 'GET'])
 def getDeletedData() :
     # get the book title from the delete book form and use this in a query to delete that book from the data base
-    title = request.values['title']
+    title = request.values['title'].title()
     with closing(conn.cursor()) as c :
         c.execute('Delete from Books where Title=? ;', (title,))
         conn.commit()
